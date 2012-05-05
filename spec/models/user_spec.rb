@@ -19,6 +19,8 @@ describe User do
   end
   subject { @user }
 
+  it { should respond_to(:admin) }
+
   it { should respond_to(:name) }
   it { should respond_to(:email) }
 
@@ -34,6 +36,11 @@ describe User do
   describe "when name is not present" do
     before {@user.name = " "}
     it { should_not be_valid }
+  end
+
+  describe "with admin attribute set to 'true'" do
+    before {@user.toggle!(:admin) }
+    it {should be_admin}
   end
 
   describe "when email is not present" do
